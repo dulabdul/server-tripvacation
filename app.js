@@ -13,7 +13,7 @@ const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
-const session = require('express-session');
+const session = require('cookie-session');
 const app = express();
 const cors = require('cors');
 
