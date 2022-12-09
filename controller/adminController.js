@@ -56,7 +56,7 @@ module.exports = {
     } catch (error) {}
   },
   actionLogout: async (req, res) => {
-    req.session.destroy();
+    req.session = null;
     res.redirect('/admin/login');
   },
   //
@@ -184,7 +184,6 @@ module.exports = {
       req.flash('alertStatus', 'success');
       res.redirect('/admin/bank');
     } catch (error) {
-      console.log(`ini error ${error}`);
       req.flash('alertMessage', `${error.message}`);
       req.flash('alertStatus', 'danger');
       res.redirect('/admin/bank');
