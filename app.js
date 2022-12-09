@@ -23,13 +23,13 @@ const cors = require('cors');
 //   optionSuccessStatus: 200,
 // };
 app.use(cors());
-let time = new Date(Date.now() + (30 * 86400 + 1000));
-let sess = {
-  secret: 'keyboard_cat',
-  cookie: { maxAge: time },
-  resave: false,
-  saveUninitialized: true,
-};
+// let time = new Date(Date.now() + (30 * 86400 + 1000));
+// let sess = {
+//   secret: 'keyboard_cat',
+//   cookie: { maxAge: time },
+//   resave: false,
+//   saveUninitialized: true,
+// };
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
