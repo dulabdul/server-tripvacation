@@ -6,16 +6,39 @@ const Bank = require('../models/Bank');
 const Member = require('../models/Member');
 const Booking = require('../models/Booking');
 module.exports = {
-  landingPage: async (req, res) => {
+  heroPage: async (req, res) => {
     try {
       const member = await Member.find();
       const treasure = await Treasure.find();
       const city = await Item.find();
+      res.status(200).json({
+        hero: {
+          travelers: member.length,
+          treasures: treasure.length,
+          cities: city.length,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  },
+  mostPickedPage: async (req, res) => {
+    try {
       const mostPicked = await Item.find()
         .select('_id title country city unit price imageId')
         .limit(5)
         .populate({ path: 'imageId', select: '_id imageUrl' });
-
+      res.status(200).json({
+        mostPicked,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  },
+  categoryPage: async (req, res) => {
+    try {
       const category = await Category.find()
         .select('_id name')
         .limit(3)
@@ -32,15 +55,6 @@ module.exports = {
             perDocumentLimit: 1,
           },
         });
-      const testimonial = {
-        imageUrl: 'images/img-testi-home.jpg',
-        name: 'Couple Trip',
-        rate: 4.7,
-        content:
-          'What a great trip with my souls and i should try again next time....',
-        familyName: 'Abdul',
-        familyOccupation: 'Front-End Web Developer',
-      };
       for (let i = 0; i < category.length; i++) {
         for (let x = 0; x < category[i].itemId.length; x++) {
           const item = await Item.findOne({ _id: category[i].itemId[x]._id });
@@ -53,13 +67,25 @@ module.exports = {
         }
       }
       res.status(200).json({
-        hero: {
-          travelers: member.length,
-          treasures: treasure.length,
-          cities: city.length,
-        },
-        mostPicked,
         category,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  },
+  testimonialPage: async (req, res) => {
+    try {
+      const testimonial = {
+        imageUrl: 'images/img-testi-home.jpg',
+        name: 'Couple Trip',
+        rate: 4.7,
+        content:
+          'What a great trip with my souls and i should try again next time....',
+        familyName: 'Abdul',
+        familyOccupation: 'Front-End Web Developer',
+      };
+      res.status(200).json({
         testimonial,
       });
     } catch (error) {
@@ -67,6 +93,7 @@ module.exports = {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
+
   detailPage: async (req, res) => {
     try {
       const { id } = req.params;

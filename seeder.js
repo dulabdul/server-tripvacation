@@ -2,45 +2,42 @@ var seeder = require('mongoose-seed');
 var mongoose = require('mongoose');
 
 // Connect to MongoDB via Mongoose
-seeder.connect(
-  'mongodb+srv://dulabdul:dulabdul1521@cluster0.t9lyffm.mongodb.net/db_tripvacation?retryWrites=true&w=majority',
-  function () {
-    // Load Mongoose models
-    seeder.loadModels([
-      './models/Category',
-      './models/Bank',
-      './models/Item',
-      './models/Featured',
-      './models/Activity',
-      './models/Member',
-      './models/Image',
-      './models/Member',
-      './models/Booking',
-      './models/Users',
-    ]);
+seeder.connect('mongodb://localhost:27017/tripvacation', function () {
+  // Load Mongoose models
+  seeder.loadModels([
+    './models/Category',
+    './models/Bank',
+    './models/Item',
+    './models/Featured',
+    './models/Activity',
+    './models/Member',
+    './models/Image',
+    './models/Member',
+    './models/Booking',
+    './models/Users',
+  ]);
 
-    // Clear specified collections
-    seeder.clearModels(
-      [
-        'Category',
-        'Bank',
-        'Item',
-        'Member',
-        'Item',
-        'Featured',
-        'Image',
-        'Booking',
-        'Users',
-      ],
-      function () {
-        // Callback to populate DB once collections have been cleared
-        seeder.populateModels(data, function () {
-          seeder.disconnect();
-        });
-      }
-    );
-  }
-);
+  // Clear specified collections
+  seeder.clearModels(
+    [
+      'Category',
+      'Bank',
+      'Item',
+      'Member',
+      'Item',
+      'Featured',
+      'Image',
+      'Booking',
+      'Users',
+    ],
+    function () {
+      // Callback to populate DB once collections have been cleared
+      seeder.populateModels(data, function () {
+        seeder.disconnect();
+      });
+    }
+  );
+});
 
 var data = [
   // start category
