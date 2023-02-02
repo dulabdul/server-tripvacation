@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 mongoose
-  .connect('mongodb://localhost:27017/tripvacation')
+  .connect(
+    'mongodb+srv://dulabdul:dulabdul1521@cluster0.t9lyffm.mongodb.net/tripvacation_db?retryWrites=true&w=majority'
+  )
   .then(() => console.log('Success Connected MongoDb'));
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
