@@ -24,7 +24,7 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
-app.use(cors());
+app.use(cors(corsOptions));
 let time = new Date(Date.now() + (30 * 86400 + 1000));
 let sess = {
   secret: 'keyboard_cat',
