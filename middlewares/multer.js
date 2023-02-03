@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const storageMultiple = multer.diskStorage({
   destination: function (req, file, cb) {
-    var dir = '/tmp';
+    var dir = 'public/images';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
@@ -26,7 +26,7 @@ const uploadMultiple = multer({
 
 // Set storage engine
 const storage = multer.diskStorage({
-  destination: '/tmp',
+  destination: 'public/images',
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
   },
