@@ -19,12 +19,12 @@ const session = require('cookie-session');
 const app = express();
 const cors = require('cors');
 
-const corsOptions = {
-  origin: '*',
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: '*',
+//   credentials: true,
+//   optionSuccessStatus: 200,
+// };
+app.use(cors());
 let time = new Date(Date.now() + (30 * 86400 + 1000));
 let sess = {
   secret: 'keyboard_cat',
@@ -62,7 +62,7 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.log(err.message);
   // render the error page
   res.status(err.status || 500);
   res.render('error');
